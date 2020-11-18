@@ -42,7 +42,8 @@ void setup(){
     Serial.print("IP: "); Serial.println(WiFi.localIP());
 
     server.on("/", handle_OnConnect);
-    server.on("/fetch", handle_more);
+    server.on("/fetch", handle_fetch);
+    server.on("/water", handle_water);
 
     server.onNotFound(handle_NotFound);
     server.begin();
@@ -60,28 +61,31 @@ void handle_OnConnect(){
     server.send(200, "text/html", SendHTML(Temperature,Humidity,Water));
 }
 
-void handle_more(){
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    
-  
+void handle_fetch(){
     Humidity = dht.readHumidity();
     Temperature = dht.readTemperature();
     Water = analogRead(water_pin);
     
     server.send(200, "text/html", SendHTMLhidden(Temperature,Humidity,Water));
+}
+
+void handle_water(){
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+
+    server.send(200, "text/plain", "Rociando agua");
 }
 
 
@@ -93,7 +97,7 @@ void handle_NotFound(){
 String SendHTMLhidden(float Temp, float Humi, float Water){
   String ptr = "<!DOCTYPE html><html>\n";
   ptr += "<title>Sensor DHT</title>\n";
-  ptr += "</head><meta http-equiv=\"refresh\" content=\"15\"\n>";
+  ptr += "</head><meta http-equiv=\"refresh\" content=\"1\"\n>";
   ptr += "<body>\n";
   ptr += "<div><label>Temperatura: ";
   ptr += Temp;
@@ -117,7 +121,7 @@ String SendHTML(float Temp, float Humd, int Water){
   ptr += "<meta http-equiv=\"refresh\" content=\"5\">\n";
   ptr += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
   ptr += "<link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600\" rel=\"stylesheet\">\n";
-  ptr += "<title>ESP8266 Weather Report</title>\n";
+  ptr += "<title>Reporte global</title>\n";
   ptr += "<style>html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #333333;}\n";
   ptr += "body{margin-top: 50px;}\n";
   ptr += "h1 {margin: 50px auto 30px;}\n";
