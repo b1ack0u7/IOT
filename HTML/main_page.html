@@ -1,0 +1,386 @@
+<?php
+if ($_GET['run']) {
+$salida = shell_exec("python3 fetch_data.py");
+parse_str("$salida");
+$salida2 = "---";
+}
+else{
+$temp = "---";
+$humd = "---";
+$salida2 = "---";
+}
+?>
+
+<!DOCTYPE html> <html>
+<head>
+	<meta http-equiv="refresh" content="10000">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+
+	<title>Sensores</title>
+	<style>html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #333333;}
+		body{margin-top: 50px;}
+		h1 {margin: 50px auto 30px;}
+		.side-by-side{display: inline-block; vertical-align: middle; position: relative;}
+
+		.humidity_edgar-icon{background-color: #3498db;width: 30px;height: 30px;border-radius: 50%;line-height: 36px;}
+		.humidity_edgar-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}
+		.humidity_edgar{font-weight: 300;font-size: 45px;color: #3498db;}
+
+		.humidity_axel-icon{background-color: #f84a3d;width: 30px;height: 30px;border-radius: 50%;line-height: 36px;}
+		.humidity_axel-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}
+		.humidity_axel{font-weight: 300;font-size: 45px;color: #f84a3d;}
+
+		.humidity_angeles-icon{background-color: #eca728;width: 30px;height: 30px;border-radius: 50%;line-height: 36px;}
+		.humidity_angeles-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}
+		.humidity_angeles{font-weight: 300;font-size: 45px;color: #eca728;}
+
+		.humidity_myron-icon{background-color: #b8ec28;width: 30px;height: 30px;border-radius: 50%;line-height: 36px;}
+		.humidity_myron-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}
+		.humidity_myron{font-weight: 300;font-size: 45px;color: #b8ec28;}
+
+		.superscript{font-size: 17px;font-weight: 600;position: absolute;right: -20px;top: 15px;}
+		.data{padding: 10px;}
+	</style>
+</head>
+
+<body>
+	<div id ="webpage_axel">
+		<div class="data_btn">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<!-- 
+			<a href="fetch" class="side-by-side w3-button w3-medium w3-amber w3-card-4">Raw data</a>
+			-->
+			<a href="?run=true" class="side-by-side w3-button w3-medium w3-pale-red w3-card-4">Obtener informacion</a>
+			<a href="?regar_todos=true" class="side-by-side w3-button w3-medium w3-pale-green w3-card-4">Regar todos</a>
+		</div>
+
+		<h1>Sensor de Axel</h1>
+		<div class="data_temperatura">
+			<div class="side-by-side humidity_axel-icon">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_axel-text">Temperatura</div>
+			<div class="side-by-side humidity_axel">
+				<?php echo $temp ?>
+			<span class="superscript">C</span></div>
+		</div>
+
+		<div class="data_humedad">
+			<div class="side-by-side humidity_axel-icon">
+				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
+				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_axel-text">Humedad</div>
+			<div class="side-by-side humidity_axel">
+				<?php echo $humd ?>
+			<span class="superscript">%</span></div>
+		</div>
+
+		<div class="data_luminosidad">
+			<div class="side-by-side humidity_axel-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 520.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;margin-left: -9.5px;">
+				<g transform="translate(0.000000,520.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M5382 4595 c-78 -134 -142 -248 -142 -252 0 -5 51 -36 113 -71 104
+				-59 112 -62 125 -45 20 27 271 467 273 477 1 9 -206 135 -222 136 -3 0 -70
+				-110 -147 -245z"/>
+				<path d="M3540 4758 c-58 -33 -107 -62 -109 -64 -2 -2 270 -484 285 -502 1 -2
+				54 27 118 63 l116 67 -37 67 c-135 239 -249 431 -258 431 -5 0 -57 -28 -115
+				-62z"/>
+				<path d="M6098 3988 c-136 -79 -248 -146 -248 -150 0 -3 30 -56 66 -118 l65
+				-111 52 30 c29 17 141 81 249 143 109 62 198 116 198 120 0 7 -129 228 -133
+				228 -1 0 -114 -64 -249 -142z"/>
+				<path d="M2843 4088 c-19 -24 -126 -219 -122 -222 21 -18 494 -284 500 -280
+				10 6 132 224 128 228 -2 1 -98 57 -214 123 -115 66 -226 130 -246 142 -29 17
+				-38 19 -46 9z"/>
+				<path d="M4422 4019 c-535 -69 -946 -479 -979 -975 -15 -227 52 -422 236 -689
+				50 -71 126 -182 169 -245 144 -210 223 -386 238 -535 l7 -65 493 0 493 0 6 38
+				c37 232 95 355 306 659 202 290 258 390 304 548 145 500 -186 1043 -743 1219
+				-154 49 -366 67 -530 45z"/>
+				<path d="M4560 1254 c-542 -69 -588 -76 -623 -100 -98 -65 -114 -197 -32 -260
+				28 -21 46 -26 88 -26 70 1 1174 140 1214 153 40 13 97 75 113 123 31 94 -39
+				188 -137 185 -21 -1 -301 -35 -623 -75z"/>
+				<path d="M4570 794 c-430 -55 -594 -80 -620 -93 -19 -10 -48 -37 -65 -60 -24
+				-35 -30 -53 -30 -96 0 -63 23 -101 78 -128 36 -18 39 -18 649 58 701 88 675
+				81 723 180 22 43 26 62 20 94 -12 71 -73 123 -142 120 -15 -1 -291 -35 -613
+				-75z"/>
+				<path d="M4600 382 c-195 -24 -357 -47 -360 -49 -12 -11 58 -119 106 -163 75
+				-67 145 -94 254 -94 112 0 180 26 260 101 64 59 104 129 119 206 7 40 6 47 -8
+				46 -9 -1 -176 -22 -371 -47z"/>
+				</g>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_axel-text">Luminosidad</div>
+			<div class="side-by-side humidity_axel">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+			<div class="btn">
+				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+				<a href="?regar_axel=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Regar ahora</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="webpage_edgar">
+		<h1>Sensor de Edgar</h1>
+		<div class="data_temperatura">
+			<div class="side-by-side humidity_edgar-icon">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_edgar-text">Temperatura</div>
+			<div class="side-by-side humidity_edgar">
+				<?php echo $salida2 ?>
+			<span class="superscript">C</span></div>
+		</div>
+
+		<div class="data_humedad">
+			<div class="side-by-side humidity_edgar-icon">
+				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
+				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_edgar-text">Humedad</div>
+			<div class="side-by-side humidity_edgar">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+		</div>
+
+		<div class="data_luminosidad">
+			<div class="side-by-side humidity_edgar-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 520.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;margin-left: -9.5px;">
+				<g transform="translate(0.000000,520.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M5382 4595 c-78 -134 -142 -248 -142 -252 0 -5 51 -36 113 -71 104
+				-59 112 -62 125 -45 20 27 271 467 273 477 1 9 -206 135 -222 136 -3 0 -70
+				-110 -147 -245z"/>
+				<path d="M3540 4758 c-58 -33 -107 -62 -109 -64 -2 -2 270 -484 285 -502 1 -2
+				54 27 118 63 l116 67 -37 67 c-135 239 -249 431 -258 431 -5 0 -57 -28 -115
+				-62z"/>
+				<path d="M6098 3988 c-136 -79 -248 -146 -248 -150 0 -3 30 -56 66 -118 l65
+				-111 52 30 c29 17 141 81 249 143 109 62 198 116 198 120 0 7 -129 228 -133
+				228 -1 0 -114 -64 -249 -142z"/>
+				<path d="M2843 4088 c-19 -24 -126 -219 -122 -222 21 -18 494 -284 500 -280
+				10 6 132 224 128 228 -2 1 -98 57 -214 123 -115 66 -226 130 -246 142 -29 17
+				-38 19 -46 9z"/>
+				<path d="M4422 4019 c-535 -69 -946 -479 -979 -975 -15 -227 52 -422 236 -689
+				50 -71 126 -182 169 -245 144 -210 223 -386 238 -535 l7 -65 493 0 493 0 6 38
+				c37 232 95 355 306 659 202 290 258 390 304 548 145 500 -186 1043 -743 1219
+				-154 49 -366 67 -530 45z"/>
+				<path d="M4560 1254 c-542 -69 -588 -76 -623 -100 -98 -65 -114 -197 -32 -260
+				28 -21 46 -26 88 -26 70 1 1174 140 1214 153 40 13 97 75 113 123 31 94 -39
+				188 -137 185 -21 -1 -301 -35 -623 -75z"/>
+				<path d="M4570 794 c-430 -55 -594 -80 -620 -93 -19 -10 -48 -37 -65 -60 -24
+				-35 -30 -53 -30 -96 0 -63 23 -101 78 -128 36 -18 39 -18 649 58 701 88 675
+				81 723 180 22 43 26 62 20 94 -12 71 -73 123 -142 120 -15 -1 -291 -35 -613
+				-75z"/>
+				<path d="M4600 382 c-195 -24 -357 -47 -360 -49 -12 -11 58 -119 106 -163 75
+				-67 145 -94 254 -94 112 0 180 26 260 101 64 59 104 129 119 206 7 40 6 47 -8
+				46 -9 -1 -176 -22 -371 -47z"/>
+				</g>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_edgar-text">Luminosidad</div>
+			<div class="side-by-side humidity_edgar">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+			<div class="btn">
+				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+				<a href="?regar_Edgar=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Regar ahora</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="webpage_angeles">
+		<h1>Sensor de Angeles</h1>
+		<div class="data_temperatura">
+			<div class="side-by-side humidity_angeles-icon">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_angeles-text">Temperatura</div>
+			<div class="side-by-side humidity_angeles">
+				<?php echo $salida2 ?>
+			<span class="superscript">C</span></div>
+		</div>
+
+		<div class="data_humedad">
+			<div class="side-by-side humidity_angeles-icon">
+				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
+				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_angeles-text">Humedad</div>
+			<div class="side-by-side humidity_angeles">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+
+		</div>
+
+		<div class="data_luminosidad">
+			<div class="side-by-side humidity_angeles-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 520.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;margin-left: -9.5px;">
+				<g transform="translate(0.000000,520.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M5382 4595 c-78 -134 -142 -248 -142 -252 0 -5 51 -36 113 -71 104
+				-59 112 -62 125 -45 20 27 271 467 273 477 1 9 -206 135 -222 136 -3 0 -70
+				-110 -147 -245z"/>
+				<path d="M3540 4758 c-58 -33 -107 -62 -109 -64 -2 -2 270 -484 285 -502 1 -2
+				54 27 118 63 l116 67 -37 67 c-135 239 -249 431 -258 431 -5 0 -57 -28 -115
+				-62z"/>
+				<path d="M6098 3988 c-136 -79 -248 -146 -248 -150 0 -3 30 -56 66 -118 l65
+				-111 52 30 c29 17 141 81 249 143 109 62 198 116 198 120 0 7 -129 228 -133
+				228 -1 0 -114 -64 -249 -142z"/>
+				<path d="M2843 4088 c-19 -24 -126 -219 -122 -222 21 -18 494 -284 500 -280
+				10 6 132 224 128 228 -2 1 -98 57 -214 123 -115 66 -226 130 -246 142 -29 17
+				-38 19 -46 9z"/>
+				<path d="M4422 4019 c-535 -69 -946 -479 -979 -975 -15 -227 52 -422 236 -689
+				50 -71 126 -182 169 -245 144 -210 223 -386 238 -535 l7 -65 493 0 493 0 6 38
+				c37 232 95 355 306 659 202 290 258 390 304 548 145 500 -186 1043 -743 1219
+				-154 49 -366 67 -530 45z"/>
+				<path d="M4560 1254 c-542 -69 -588 -76 -623 -100 -98 -65 -114 -197 -32 -260
+				28 -21 46 -26 88 -26 70 1 1174 140 1214 153 40 13 97 75 113 123 31 94 -39
+				188 -137 185 -21 -1 -301 -35 -623 -75z"/>
+				<path d="M4570 794 c-430 -55 -594 -80 -620 -93 -19 -10 -48 -37 -65 -60 -24
+				-35 -30 -53 -30 -96 0 -63 23 -101 78 -128 36 -18 39 -18 649 58 701 88 675
+				81 723 180 22 43 26 62 20 94 -12 71 -73 123 -142 120 -15 -1 -291 -35 -613
+				-75z"/>
+				<path d="M4600 382 c-195 -24 -357 -47 -360 -49 -12 -11 58 -119 106 -163 75
+				-67 145 -94 254 -94 112 0 180 26 260 101 64 59 104 129 119 206 7 40 6 47 -8
+				46 -9 -1 -176 -22 -371 -47z"/>
+				</g>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_angeles-text">Luminosidad</div>
+			<div class="side-by-side humidity_angeles">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+			<div class="btn">
+				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+				<a href="?regar_Angeles=true" class="side-by-side w3-button w3-medium w3-orange w3-card-4">Regar ahora</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="webpage_myron">
+		<h1>Sensor de Myron</h1>
+		<div class="data_temperatura">
+			<div class="side-by-side humidity_myron-icon">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_myron-text">Temperatura</div>
+			<div class="side-by-side humidity_myron">
+				<?php echo $salida2 ?>
+			<span class="superscript">C</span></div>
+		</div>
+
+		<div class="data_humedad">
+			<div class="side-by-side humidity_myron-icon">
+				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
+				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_myron-text">Humedad</div>
+			<div class="side-by-side humidity_myron">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+
+		</div>
+
+		<div class="data_luminosidad">
+			<div class="side-by-side humidity_myron-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 520.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;margin-left: -9.5px;">
+				<g transform="translate(0.000000,520.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M5382 4595 c-78 -134 -142 -248 -142 -252 0 -5 51 -36 113 -71 104
+				-59 112 -62 125 -45 20 27 271 467 273 477 1 9 -206 135 -222 136 -3 0 -70
+				-110 -147 -245z"/>
+				<path d="M3540 4758 c-58 -33 -107 -62 -109 -64 -2 -2 270 -484 285 -502 1 -2
+				54 27 118 63 l116 67 -37 67 c-135 239 -249 431 -258 431 -5 0 -57 -28 -115
+				-62z"/>
+				<path d="M6098 3988 c-136 -79 -248 -146 -248 -150 0 -3 30 -56 66 -118 l65
+				-111 52 30 c29 17 141 81 249 143 109 62 198 116 198 120 0 7 -129 228 -133
+				228 -1 0 -114 -64 -249 -142z"/>
+				<path d="M2843 4088 c-19 -24 -126 -219 -122 -222 21 -18 494 -284 500 -280
+				10 6 132 224 128 228 -2 1 -98 57 -214 123 -115 66 -226 130 -246 142 -29 17
+				-38 19 -46 9z"/>
+				<path d="M4422 4019 c-535 -69 -946 -479 -979 -975 -15 -227 52 -422 236 -689
+				50 -71 126 -182 169 -245 144 -210 223 -386 238 -535 l7 -65 493 0 493 0 6 38
+				c37 232 95 355 306 659 202 290 258 390 304 548 145 500 -186 1043 -743 1219
+				-154 49 -366 67 -530 45z"/>
+				<path d="M4560 1254 c-542 -69 -588 -76 -623 -100 -98 -65 -114 -197 -32 -260
+				28 -21 46 -26 88 -26 70 1 1174 140 1214 153 40 13 97 75 113 123 31 94 -39
+				188 -137 185 -21 -1 -301 -35 -623 -75z"/>
+				<path d="M4570 794 c-430 -55 -594 -80 -620 -93 -19 -10 -48 -37 -65 -60 -24
+				-35 -30 -53 -30 -96 0 -63 23 -101 78 -128 36 -18 39 -18 649 58 701 88 675
+				81 723 180 22 43 26 62 20 94 -12 71 -73 123 -142 120 -15 -1 -291 -35 -613
+				-75z"/>
+				<path d="M4600 382 c-195 -24 -357 -47 -360 -49 -12 -11 58 -119 106 -163 75
+				-67 145 -94 254 -94 112 0 180 26 260 101 64 59 104 129 119 206 7 40 6 47 -8
+				46 -9 -1 -176 -22 -371 -47z"/>
+				</g>
+				</svg>
+			</div>
+			<div class="side-by-side humidity_myron-text">Luminosidad</div>
+			<div class="side-by-side humidity_myron">
+				<?php echo $salida2 ?>
+			<span class="superscript">%</span></div>
+
+			<div class="btn">
+				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+				<a href="?regar_Myron=true" class="side-by-side w3-button w3-medium w3-lime w3-card-4">Regar ahora</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
