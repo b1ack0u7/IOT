@@ -20,7 +20,6 @@ CREATE TABLE `iot`.`reg` (
   PRIMARY KEY (`ID`));
 
 
-
 CREATE TABLE `iot`.`reg_rociado` (
   `ID` VARCHAR(45) NOT NULL,
   `fecha` VARCHAR(45) NOT NULL,
@@ -33,4 +32,3 @@ ADD CONSTRAINT `ID`
   REFERENCES `iot`.`users` (`ID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
-

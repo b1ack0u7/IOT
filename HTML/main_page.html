@@ -1,6 +1,7 @@
 <?php
+//boton obtener informacion-----------------------------------------
 if ($_GET['run']) {
-$salida = shell_exec("python3 fetch_data.py");
+$salida = shell_exec("python3 /var/www/html/scripts/fetch_data.py");
 parse_str("$salida");
 $salida2 = "---";
 }
@@ -9,7 +10,16 @@ $temp = "---";
 $humd = "---";
 $salida2 = "---";
 }
+//boton obtener informacion-----------------------------------------
+
+if ($_GET['regar_axel']) {
+echo '<script type="text/javascript">';
+echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
+echo '</script>';
+}
+
 ?>
+
 
 <!DOCTYPE html> <html>
 <head>

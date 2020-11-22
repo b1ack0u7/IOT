@@ -43,7 +43,8 @@ void setup(){
 
     server.on("/", handle_OnConnect);
     server.on("/fetch", handle_fetch);
-    server.on("/water", handle_water);
+    server.on("/water_on", handle_water_on);
+    server.on("/water_off", handle_water_off);
 
     server.onNotFound(handle_NotFound);
     server.begin();
@@ -69,23 +70,26 @@ void handle_fetch(){
     server.send(200, "text/html", SendHTMLhidden(Temperature,Humidity,Water));
 }
 
-void handle_water(){
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-
+void handle_water_on(){
     server.send(200, "text/plain", "Rociando agua");
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+    digitalWrite(led_pin, LOW);
+    delay(1000);
+    digitalWrite(led_pin, HIGH);
+    delay(1000);
+}
+
+void handle_water_off(){
+    server.send(200, "text/plain", "Apagando rociado");
 }
 
 
