@@ -12,7 +12,7 @@ def send_data(op):
     if(op == 2): message="on"
     if(op == 3): message="quit"
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(("127.0.0.1",4444))
+    sock.connect(("192.168.0.35",4444))
     sock.send(message.encode())
     
     print("[ok]: Solicitud enviada\n")

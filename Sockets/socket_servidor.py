@@ -3,7 +3,7 @@ import subprocess
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 4444
-server.bind(("127.0.0.1",port))
+server.bind(("192.168.0.35",port))
 server.listen(4)
 print("[!]: Socket iniciado")
 

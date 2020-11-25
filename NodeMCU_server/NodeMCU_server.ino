@@ -14,6 +14,10 @@ int led_pin = 5;
 int water_pin = A0; 
 //-----------------------------
 
+//electrovalvula
+int valve = 14;
+//-----------------------------
+
 const char* ssid = "Ubee4C00-2.4G";
 const char* password = "5F99F84C00";
 ESP8266WebServer server(80);
@@ -25,6 +29,10 @@ void setup(){
 
     pinMode(led_pin, OUTPUT);
     pinMode(DHT_pin, INPUT);
+    
+    pinMode(valve, OUTPUT);
+    digitalWrite(valve, HIGH);
+    
     digitalWrite(led_pin, LOW);
     dht.begin();
 
@@ -59,7 +67,7 @@ void handle_OnConnect(){
     Temperature = dht.readTemperature();
     Humidity = dht.readHumidity();
     Water = analogRead(water_pin);
-    server.send(200, "text/html", SendHTML(Temperature,Humidity,Water));
+    server.send(200, "text/html", HTML_main(Temperature,Humidity,Water));
 }
 
 void handle_fetch(){
@@ -67,29 +75,26 @@ void handle_fetch(){
     Temperature = dht.readTemperature();
     Water = analogRead(water_pin);
     
-    server.send(200, "text/html", SendHTMLhidden(Temperature,Humidity,Water));
+    server.send(200, "text/html", HTML_fetch(Temperature,Humidity,Water));
 }
 
 void handle_water_on(){
     server.send(200, "text/plain", "Rociando agua");
+    /*
     digitalWrite(led_pin, HIGH);
     delay(1000);
     digitalWrite(led_pin, LOW);
     delay(1000);
     digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
+    */
+    digitalWrite(valve, LOW);
+    //delay(1500);
+    //digitalWrite(valve, HIGH);
 }
 
 void handle_water_off(){
     server.send(200, "text/plain", "Apagando rociado");
+    digitalWrite(valve, HIGH);
 }
 
 
@@ -98,7 +103,7 @@ void handle_NotFound(){
 }
 
 
-String SendHTMLhidden(float Temp, float Humi, float Water){
+String HTML_fetch(float Temp, float Humi, float Water){
   String ptr = "<!DOCTYPE html><html>\n";
   ptr += "<title>Sensor DHT</title>\n";
   ptr += "</head><meta http-equiv=\"refresh\" content=\"1\"\n>";
@@ -119,7 +124,7 @@ String SendHTMLhidden(float Temp, float Humi, float Water){
   return ptr;
 }
 
-String SendHTML(float Temp, float Humd, int Water){
+String HTML_main(float Temp, float Humd, int Water){
   String ptr = "<!DOCTYPE html> <html>\n";
   ptr += "<head>\n";
   ptr += "<meta http-equiv=\"refresh\" content=\"5\">\n";

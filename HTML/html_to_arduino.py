@@ -20,7 +20,8 @@ def output_file():
         
 
 def load_file():
-    arch = open("temp_humd_page.html","r")
+    text = str(input("Ingrese el nombre del archivo: "))
+    arch = open(text,"r")
     lines = arch.readlines()
     arch.close()
     
