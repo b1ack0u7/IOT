@@ -1,45 +1,62 @@
 <?php
 //boton obtener informacion-----------------------------------------
 
+$axel_temp = "---";
+$axel_humd = "---";
+$edgar_temp = "---";
+$edgar_humd = "---";
+$salida2 = "---";
+
 if ($_GET['run']) {
 //Axel--------------------------------------------------------------
-$out_axel = shell_exec("python3 /var/www/html/scripts/fetch_axel.py");
+$out_axel = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_axel.py");
 parse_str("$out_axel");
 $axel_temp = $temp;
 $axel_humd = $humd;
 //Axel--------------------------------------------------------------
 
 //Edgar--------------------------------------------------------------
-$out_edgar = shell_exec("python3 /var/www/html/scripts/fetch_edgar.py");
+$out_edgar = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_edgar.py");
 parse_str("$out_edgar");
 $edgar_temp = $temp;
 $edgar_humd = $humd;
 //Edgar--------------------------------------------------------------
 
 
-$salida2 = "---";
-}
-else{
-$axel_temp = "---";
-$axel_humd = "---";
 
-$edgar_temp = "---";
-$edgar_humd = "---";
-
-
-
-$temp = "---";
-$humd = "---";
-$salida2 = "---";
 }
 //boton obtener informacion-----------------------------------------
 
-if ($_GET['regar_axel']) {
-shell_exec("python3 /var/www/html/scripts/axel_regar.py");
+//regar Axel--------------------------------------------------------
+if ($_GET['regar_Axel_on']) {
+shell_exec("python3 /var/www/html/scripts/sprays/spray_axel_on.py");
 echo '<script type="text/javascript">';
-echo ' alert("Regando el huerto de Axel")';  //not showing an alert box.
+echo ' alert("Regando el huerto de Axel")';
 echo '</script>';
 }
+if ($_GET['regar_Axel_off']){
+shell_exec("python3 /var/www/html/scripts/sprays/spray_axel_off.py");
+echo '<script type="text/javascript">';
+echo ' alert("Apagando el riego huerto de Axel")';
+echo '</script>';
+}
+//regar Axel--------------------------------------------------------
+
+//regar Edgar-------------------------------------------------------
+if ($_GET['regar_Edgar_on']) {
+shell_exec("python3 /var/www/html/scripts/sprays/spray_edgar_on.py");
+echo '<script type="text/javascript">';
+echo ' alert("Regando el huerto de Edgar")';
+echo '</script>';
+}
+if ($_GET['regar_Edgar_off']){
+shell_exec("python3 /var/www/html/scripts/sprays/spray_edgar_off.py");
+echo '<script type="text/javascript">';
+echo ' alert("Apagando el riego huerto de Edgar")';
+echo '</script>';
+}
+//regar Edgar-------------------------------------------------------
+
 
 ?>
 
@@ -89,9 +106,6 @@ echo '</script>';
 	<div id ="webpage_axel">
 		<div class="data_btn">
 			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-			<!-- 
-			<a href="fetch" class="side-by-side w3-button w3-medium w3-amber w3-card-4">Raw data</a>
-			-->
 			<a href="?run=true" class="side-by-side w3-button w3-medium w3-pale-red w3-card-4">Obtener informacion</a>
 			<a href="?regar_todos=true" class="side-by-side w3-button w3-medium w3-pale-green w3-card-4">Regar todos</a>
 		</div>
@@ -125,7 +139,7 @@ echo '</script>';
 			<div class="side-by-side humidity_axel-text">Humedad</div>
 			<div class="side-by-side humidity_axel">
 				<?php echo $axel_humd ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 		</div>
 
 		<div class="data_luminosidad">
@@ -167,11 +181,12 @@ echo '</script>';
 			<div class="side-by-side humidity_axel-text">Luminosidad</div>
 			<div class="side-by-side humidity_axel">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
-			<div class="btn">
+			<div class="btns">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_axel=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Regar ahora</a>
+				<a href="?regar_Axel_on=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Iniciar regado</a>
+				<a href="?regar_Axel_off=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Detener regado</a>
 			</div>
 		</div>
 	</div>
@@ -206,7 +221,7 @@ echo '</script>';
 			<div class="side-by-side humidity_edgar-text">Humedad</div>
 			<div class="side-by-side humidity_edgar">
 				<?php echo $edgar_humd ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 		</div>
 
 		<div class="data_luminosidad">
@@ -248,11 +263,12 @@ echo '</script>';
 			<div class="side-by-side humidity_edgar-text">Luminosidad</div>
 			<div class="side-by-side humidity_edgar">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 			<div class="btn">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Edgar=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Regar ahora</a>
+				<a href="?regar_Edgar_on=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Iniciar regado</a>
+				<a href="?regar_Edgar_off=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Detener regado</a>
 			</div>
 		</div>
 	</div>
@@ -287,7 +303,7 @@ echo '</script>';
 			<div class="side-by-side humidity_angeles-text">Humedad</div>
 			<div class="side-by-side humidity_angeles">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 		</div>
 
 		<div class="data_luminosidad">
@@ -329,7 +345,7 @@ echo '</script>';
 			<div class="side-by-side humidity_angeles-text">Luminosidad</div>
 			<div class="side-by-side humidity_angeles">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 			<div class="btn">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -368,7 +384,7 @@ echo '</script>';
 			<div class="side-by-side humidity_myron-text">Humedad</div>
 			<div class="side-by-side humidity_myron">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 
 		</div>
@@ -412,7 +428,7 @@ echo '</script>';
 			<div class="side-by-side humidity_myron-text">Luminosidad</div>
 			<div class="side-by-side humidity_myron">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 			<div class="btn">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -451,7 +467,7 @@ echo '</script>';
 			<div class="side-by-side humidity_johna-text">Humedad</div>
 			<div class="side-by-side humidity_johna">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 		</div>
 
 		<div class="data_luminosidad">
@@ -493,7 +509,7 @@ echo '</script>';
 			<div class="side-by-side humidity_johna-text">Luminosidad</div>
 			<div class="side-by-side humidity_johna">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 			<div class="btn">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -504,37 +520,6 @@ echo '</script>';
 
 	<div id="webpage_javier">
 		<h1>Sensor de javier</h1>
-		<div class="data_temperatura">
-			<div class="side-by-side humidity_javier-icon">
-				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
-				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
-				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
-				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
-				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
-				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
-				</svg>
-			</div>
-			<div class="side-by-side humidity_javier-text">Temperatura</div>
-			<div class="side-by-side humidity_javier">
-				<?php echo $salida2 ?>
-			<span class="superscript">C</span></div>
-		</div>
-
-		<div class="data_humedad">
-			<div class="side-by-side humidity_javier-icon">
-				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
-				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
-				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
-				</svg>
-			</div>
-			<div class="side-by-side humidity_javier-text">Humedad</div>
-			<div class="side-by-side humidity_javier">
-				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
-		</div>
-
 		<div class="data_luminosidad">
 			<div class="side-by-side humidity_javier-icon">
 				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -574,7 +559,7 @@ echo '</script>';
 			<div class="side-by-side humidity_javier-text">Luminosidad</div>
 			<div class="side-by-side humidity_javier">
 				<?php echo $salida2 ?>
-			<span class="superscript">%</span></div>
+			<span class="superscript"></span></div>
 
 			<div class="btn">
 				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

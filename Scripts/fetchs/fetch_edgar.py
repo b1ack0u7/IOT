@@ -34,5 +34,8 @@ td.join()
 arr.append(fecha)
 arr.append(time.rstrip("\n"))
 
-CLSS_CON.add_reg(arr)
-print("humd=%s&temp=%s"%(arr[1],arr[2]))
+if(arr[1] == "" and arr[2] == ""):
+    print("humd=N/C&temp=N/C")
+else:
+    CLSS_CON.add_reg(arr)
+    print("humd=%s&temp=%s"%(arr[1],arr[2]))

@@ -15,7 +15,7 @@ class Conexion_fetchdata():
         self.mydb.commit()
 
     def add_roc(self,val):
-        sql="INSERT INTO reg (nombre, fecha, hora) VALUES (%s, %s, %s)"
+        sql="INSERT INTO roc (nombre, estado, fecha, hora) VALUES (%s, %s, %s, %s)"
         mycursor=self.mydb.cursor()
         mycursor.execute(sql,val)
         self.mydb.commit()

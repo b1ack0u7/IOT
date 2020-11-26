@@ -15,9 +15,10 @@ def date():
 td=threading.Thread(target=date)
 td.start()
 
-text = subprocess.run(['curl', 'http://192.168.0.45/water_on'], stdout=subprocess.PIPE)
+text = subprocess.run(['curl', 'http://internetthings.ddns.net/water_off'], stdout=subprocess.PIPE)
 td.join()
-arr.append("Axel")
+arr.append("Edgar")
+arr.append("Encendido")
 arr.append(fecha)
 arr.append(time.rstrip("\n"))
 
