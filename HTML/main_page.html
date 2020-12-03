@@ -71,7 +71,6 @@ $javier_lumi = $lumi;
 //Javier-------------------------------------------------------------
 }
 
-//boton obtener informacion-----------------------------------------
 //regar Axel--------------------------------------------------------
 if ($_GET['regar_Axel_on']) {
 shell_exec("python3 /var/www/html/scripts/sprays/spray_axel_on.py");
@@ -179,6 +178,8 @@ echo '</script>';
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<a href="?run=true" class="side-by-side w3-button w3-medium w3-pale-red w3-card-4">Obtener informacion</a>
 		<a href="?regar_todos=true" class="side-by-side w3-button w3-medium w3-pale-green w3-card-4">Regar todos</a>
+		<a href="sql.php" class="side-by-side w3-button w3-medium w3-green w3-card-4">SQL</a>
+
 	</div>
 
 	<div id ="webpage_axel">

@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>SQL</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Bienvenido al acceso a la base de datos</h1>
+<h2>Huerto IoT</h2>
+<form action="">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" value="todos"><br><br>
+    <button type="submit" name="button" value="cons_reg">Consultar Registro</button>
+    <button type="submit" name="button" value="cons_roc">Consultar Registro EV</button>
+</form>
+
+<?php
+if ($_GET['name']) {
+$name = $_GET['name'];
+$btn = $_GET['button'];
+$out = shell_exec("python3 /var/www/html/scripts/sql/sql_fetch.py $name $btn");
+$data = explode(";", $out);
+
+if ($btn == "cons_reg"){
+echo '  <table>
+        <tr>
+        <th>Conteo</th>
+        <th>Nombre</th>
+        <th>Humedad</th>
+        <th>Temperatura</th>
+        <th>Luminosidad</th>
+        <th>Nivel de agua</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        </tr>';
+}
+else{
+echo '  <table>
+        <tr>
+        <th>Conteo</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        </tr>';
+}
+
+for($i = 0; $i < count($data); ++$i) {
+    echo '<tr>';
+    $tmp = explode(",", $data[$i]);
+    for($z = 0; $z < count($tmp); ++$z){
+        echo '<th>';
+        echo $tmp[$z];
+        echo '</th>';
+    }
+    echo '</tr>';
+
+}
+echo '</table>';
+
+
+}
+?>
+</body>
+</html>
