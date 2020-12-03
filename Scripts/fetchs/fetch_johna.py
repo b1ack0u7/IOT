@@ -15,7 +15,7 @@ def date():
 td=threading.Thread(target=date)
 td.start()
 
-text = subprocess.run(['curl', '-m', '6','http://jonhrh.ddns.net/fetch'], stdout=subprocess.PIPE)
+text = subprocess.run(['curl', '-m', '5','http://jonhrh.ddns.net/fetch'], stdout=subprocess.PIPE)
 r=str(text.stdout)
 
 arr.append("Johna")
@@ -25,8 +25,6 @@ arr.append("N/D")
 arr.append(r[r.find("Luz:"):len(r)])
 arr[3] = arr[3][0:arr[3].find("\\n")]
 arr[3] = arr[3][arr[3].find(":")+2:len(arr[3])]
-if(arr[3] == "0"): arr[3] = "No"
-else: arr[3] = "Si"
 
 arr.append("N/D")
 
@@ -35,7 +33,7 @@ arr.append(fecha)
 arr.append(time.rstrip("\n"))
 
 if(arr[1] == "" and arr[2] == ""):
-    print("humd=N/C&temp=N/C&lumi=N/C")
+    print("lumi=N/C")
 else:
     CLSS_CON.add_reg(arr)
-    print("lumi=%s"%(arr[1]))
+    print("lumi=%s"%(arr[3]))

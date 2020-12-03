@@ -1,5 +1,4 @@
 <?php
-//boton obtener informacion-----------------------------------------
 $axel_temp = "---";
 $axel_humd = "---";
 $axel_lumi = "---";
@@ -20,7 +19,8 @@ $myron_humd = "---";
 $myron_lumi = "---";
 $myron_nvwa = "---";
 
-$salida2 = "---";
+$johna_lumi = "---";
+$javier_lumi = "---";
 
 if ($_GET['run']) {
 //Axel--------------------------------------------------------------
@@ -58,11 +58,20 @@ $myron_humd = $humd;
 $myron_lumi = $lumi;
 //Myron--------------------------------------------------------------
 
+//Johna--------------------------------------------------------------
+$out_johna = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_johna.py");
+parse_str("$out_johna");
+$johna_lumi = $lumi;
+//Johna--------------------------------------------------------------
 
-
+//Javier-------------------------------------------------------------
+$out_javier = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_javier.py");
+parse_str("$out_javier");
+$javier_lumi = $lumi;
+//Javier-------------------------------------------------------------
 }
-//boton obtener informacion-----------------------------------------
 
+//boton obtener informacion-----------------------------------------
 //regar Axel--------------------------------------------------------
 if ($_GET['regar_Axel_on']) {
 shell_exec("python3 /var/www/html/scripts/sprays/spray_axel_on.py");
@@ -122,7 +131,6 @@ echo ' alert("Apagando el riego del huerto de Myron")';
 echo '</script>';
 }
 //regar Myron-------------------------------------------------------
-
 ?>
 
 <!DOCTYPE html> <html>
@@ -167,13 +175,13 @@ echo '</script>';
 </head>
 
 <body>
-	<div id ="webpage_axel">
-		<div class="data_btn">
-			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-			<a href="?run=true" class="side-by-side w3-button w3-medium w3-pale-red w3-card-4">Obtener informacion</a>
-			<a href="?regar_todos=true" class="side-by-side w3-button w3-medium w3-pale-green w3-card-4">Regar todos</a>
-		</div>
+	<div class="data_btn">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<a href="?run=true" class="side-by-side w3-button w3-medium w3-pale-red w3-card-4">Obtener informacion</a>
+		<a href="?regar_todos=true" class="side-by-side w3-button w3-medium w3-pale-green w3-card-4">Regar todos</a>
+	</div>
 
+	<div id ="webpage_axel">
 		<h1>Sensor de Axel</h1>
 		<div class="data_temperatura">
 			<div class="side-by-side humidity_axel-icon">
@@ -628,7 +636,6 @@ echo '</script>';
 
 	<div id="webpage_johna">
 		<h1>Sensor de johna</h1>
-
 		<div class="data_luminosidad">
 			<div class="side-by-side humidity_johna-icon">
 				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -667,14 +674,8 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_johna-text">Luminosidad</div>
 			<div class="side-by-side humidity_johna">
-				<?php echo $salida2 ?>
+				<?php echo $johna_lumi ?>
 			<span class="superscript"></span></div>
-		</div>
-
-		<div class="btn">
-			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-			<a href="?regar_Johna_on=true" class="side-by-side w3-button w3-medium w3-deep-purple w3-card-4">Iniciar regado</a>
-			<a href="?regar_Johna_off=true" class="side-by-side w3-button w3-medium w3-deep-purple w3-card-4">Detener regado</a>
 		</div>
 	</div>
 
@@ -718,13 +719,8 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_javier-text">Luminosidad</div>
 			<div class="side-by-side humidity_javier">
-				<?php echo $salida2 ?>
+				<?php echo $javier_lumi ?>
 			<span class="superscript"></span></div>
-
-			<div class="btn">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Javier=true" class="side-by-side w3-button w3-medium w3-yellow w3-card-4">Regar ahora</a>
-			</div>
 		</div>
 	</div>
 

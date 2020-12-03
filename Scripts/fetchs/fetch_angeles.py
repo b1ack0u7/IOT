@@ -15,7 +15,7 @@ def date():
 td=threading.Thread(target=date)
 td.start()
 
-text = subprocess.run(['curl', '-m', '6','http://aahiot.ddns.net/fetch'], stdout=subprocess.PIPE)
+text = subprocess.run(['curl', '-m', '5','http://aahiot.ddns.net/fetch'], stdout=subprocess.PIPE)
 r=str(text.stdout)
 
 arr.append("Edgar")
