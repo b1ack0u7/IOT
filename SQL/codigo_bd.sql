@@ -19,6 +19,7 @@ CREATE TABLE `iot`.`reg` (
   `humedad` VARCHAR(45) NOT NULL,
   `temperatura` VARCHAR(45) NOT NULL,
   `luminosidad` VARCHAR(45) NOT NULL,
+  `nv_agua` VARCHAR(45) NOT NULL,
   `fecha` VARCHAR(45) NOT NULL,
   `hora` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`));

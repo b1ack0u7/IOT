@@ -1,10 +1,25 @@
 <?php
 //boton obtener informacion-----------------------------------------
-
 $axel_temp = "---";
 $axel_humd = "---";
+$axel_lumi = "---";
+$axel_nvwa = "---";
+
 $edgar_temp = "---";
 $edgar_humd = "---";
+$edgar_lumi = "---";
+$edgar_nvwa = "---";
+
+$angeles_temp = "---";
+$angeles_humd = "---";
+$angeles_lumi = "---";
+$angeles_nvwa = "---";
+
+$myron_temp = "---";
+$myron_humd = "---";
+$myron_lumi = "---";
+$myron_nvwa = "---";
+
 $salida2 = "---";
 
 if ($_GET['run']) {
@@ -13,6 +28,8 @@ $out_axel = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_axel.py");
 parse_str("$out_axel");
 $axel_temp = $temp;
 $axel_humd = $humd;
+$axel_lumi = $lumi;
+$axel_nvwa = $nvwa;
 //Axel--------------------------------------------------------------
 
 //Edgar--------------------------------------------------------------
@@ -20,7 +37,26 @@ $out_edgar = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_edgar.py");
 parse_str("$out_edgar");
 $edgar_temp = $temp;
 $edgar_humd = $humd;
+$edgar_lumi = $lumi;
+$edgar_nvwa = $nvwa;
 //Edgar--------------------------------------------------------------
+
+//Angeles------------------------------------------------------------
+$out_angeles = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_angeles.py");
+parse_str("$out_angeles");
+$angeles_temp = $temp;
+$angeles_humd = $humd;
+$angeles_lumi = $lumi;
+$angeles_nvwa = $nvwa;
+//Angeles------------------------------------------------------------
+
+//Myron--------------------------------------------------------------
+$out_myron = shell_exec("python3 /var/www/html/scripts/fetchs/fetch_myron.py");
+parse_str("$out_myron");
+$myron_temp = $temp;
+$myron_humd = $humd;
+$myron_lumi = $lumi;
+//Myron--------------------------------------------------------------
 
 
 
@@ -37,7 +73,7 @@ echo '</script>';
 if ($_GET['regar_Axel_off']){
 shell_exec("python3 /var/www/html/scripts/sprays/spray_axel_off.py");
 echo '<script type="text/javascript">';
-echo ' alert("Apagando el riego huerto de Axel")';
+echo ' alert("Apagando el riego del huerto de Axel")';
 echo '</script>';
 }
 //regar Axel--------------------------------------------------------
@@ -52,14 +88,42 @@ echo '</script>';
 if ($_GET['regar_Edgar_off']){
 shell_exec("python3 /var/www/html/scripts/sprays/spray_edgar_off.py");
 echo '<script type="text/javascript">';
-echo ' alert("Apagando el riego huerto de Edgar")';
+echo ' alert("Apagando el riego del huerto de Edgar")';
 echo '</script>';
 }
 //regar Edgar-------------------------------------------------------
 
+//regar Angeles-----------------------------------------------------
+if ($_GET['regar_Angeles_on']) {
+shell_exec("python3 /var/www/html/scripts/sprays/spray_angeles_on.py");
+echo '<script type="text/javascript">';
+echo ' alert("Regando el huerto de Angeles")';
+echo '</script>';
+}
+if ($_GET['regar_Angeles_off']){
+shell_exec("python3 /var/www/html/scripts/sprays/spray_angeles_off.py");
+echo '<script type="text/javascript">';
+echo ' alert("Apagando el riego del huerto de Angeles")';
+echo '</script>';
+}
+//regar Angeles-----------------------------------------------------
+
+//regar Myron-------------------------------------------------------
+if ($_GET['regar_Myron_on']) {
+shell_exec("python3 /var/www/html/scripts/sprays/spray_myron_on.py");
+echo '<script type="text/javascript">';
+echo ' alert("Regando el huerto de Myron")';
+echo '</script>';
+}
+if ($_GET['regar_Myron_off']){
+shell_exec("python3 /var/www/html/scripts/sprays/spray_myron_off.py");
+echo '<script type="text/javascript">';
+echo ' alert("Apagando el riego del huerto de Myron")';
+echo '</script>';
+}
+//regar Myron-------------------------------------------------------
 
 ?>
-
 
 <!DOCTYPE html> <html>
 <head>
@@ -180,14 +244,55 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_axel-text">Luminosidad</div>
 			<div class="side-by-side humidity_axel">
-				<?php echo $salida2 ?>
+				<?php echo $axel_lumi ?>
 			<span class="superscript"></span></div>
+		</div>
 
-			<div class="btns">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Axel_on=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Iniciar regado</a>
-				<a href="?regar_Axel_off=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Detener regado</a>
+		<div class="data_nivel_agua">
+			<div class="side-by-side humidity_axel-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 980.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;height: 74px;width: 20px;">
+				<g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M3900 9789 c-1202 -45 -2243 -231 -2772 -495 -251 -125 -399 -263
+				-469 -439 l-24 -60 -3 -3880 c-2 -3550 -1 -3884 14 -3930 44 -137 122 -242
+				252 -340 269 -202 736 -361 1395 -475 1744 -301 4211 -189 5347 243 353 135
+				562 289 658 487 l47 95 3 3865 c2 2837 0 3881 -8 3925 -50 265 -325 480 -831
+				648 -810 269 -2219 408 -3609 356z m1280 -600 c1150 -55 2131 -241 2499 -474
+				43 -26 44 -28 25 -42 -43 -34 -248 -125 -374 -167 -473 -157 -1123 -260 -2010
+				-318 -266 -18 -1419 -17 -1670 0 -909 63 -1566 168 -2017 323 -114 39 -318
+				131 -357 162 -19 14 -18 16 25 42 370 235 1378 424 2524 475 444 20 934 20
+				1355 -1z m-3810 -1214 c1006 -373 3091 -509 4775 -310 626 74 1152 188 1504
+				325 56 22 103 40 104 40 1 0 1 -1551 0 -3447 l-3 -3447 -27 -23 c-50 -41 -245
+				-131 -385 -177 -428 -143 -1074 -252 -1813 -306 -622 -45 -1439 -45 -2075 1
+				-1028 73 -1910 268 -2197 485 l-33 25 0 779 0 779 638 3 637 3 52 24 c64 29
+				134 101 158 164 26 69 18 188 -18 249 -32 56 -86 104 -146 132 -45 21 -60 21
+				-684 24 l-637 3 2 472 3 472 645 5 645 5 49 25 c215 110 207 432 -13 534 -45
+				21 -58 21 -688 24 l-643 3 0 474 0 474 643 3 c629 3 643 3 687 24 138 65 205
+				228 154 377 -20 60 -79 126 -140 157 l-49 25 -645 5 -645 5 -3 824 c-2 782 -1
+				823 15 816 10 -4 70 -26 133 -50z"/>
+				<path d="M5310 6494 c-106 -29 -136 -61 -386 -414 -326 -458 -564 -841 -779
+				-1250 -183 -348 -228 -508 -228 -805 0 -147 4 -199 21 -281 131 -611 589
+				-1059 1197 -1171 138 -25 380 -23 523 5 296 59 548 193 762 406 251 249 396
+				558 431 918 20 216 -19 474 -106 683 -108 262 -567 1008 -1004 1632 -142 203
+				-178 241 -256 271 -53 20 -118 22 -175 6z m200 -992 c260 -390 574 -909 665
+				-1097 53 -110 76 -205 82 -340 4 -85 1 -143 -10 -200 -66 -348 -339 -627 -687
+				-701 -85 -18 -267 -17 -354 1 -330 70 -598 329 -676 655 -38 163 -22 390 38
+				530 41 95 225 435 333 616 121 203 465 724 477 724 4 0 63 -85 132 -188z"/>
+				</g>
+				</svg>
 			</div>
+			<div class="side-by-side humidity_axel-text">Nivel agua</div>
+			<div class="side-by-side humidity_axel">
+				<?php echo $axel_nvwa ?>
+			<span class="superscript"></span></div>
+		</div>
+
+		<div class="btns">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<a href="?regar_Axel_on=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Iniciar regado</a>
+			<a href="?regar_Axel_off=true" class="side-by-side w3-button w3-medium w3-red w3-card-4">Detener regado</a>
 		</div>
 	</div>
 
@@ -262,14 +367,55 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_edgar-text">Luminosidad</div>
 			<div class="side-by-side humidity_edgar">
-				<?php echo $salida2 ?>
+				<?php echo $edgar_lumi ?>
 			<span class="superscript"></span></div>
+		</div>
 
-			<div class="btn">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Edgar_on=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Iniciar regado</a>
-				<a href="?regar_Edgar_off=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Detener regado</a>
+		<div class="data_nivel_agua">
+			<div class="side-by-side humidity_edgar-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 980.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;height: 74px;width: 20px;">
+				<g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M3900 9789 c-1202 -45 -2243 -231 -2772 -495 -251 -125 -399 -263
+				-469 -439 l-24 -60 -3 -3880 c-2 -3550 -1 -3884 14 -3930 44 -137 122 -242
+				252 -340 269 -202 736 -361 1395 -475 1744 -301 4211 -189 5347 243 353 135
+				562 289 658 487 l47 95 3 3865 c2 2837 0 3881 -8 3925 -50 265 -325 480 -831
+				648 -810 269 -2219 408 -3609 356z m1280 -600 c1150 -55 2131 -241 2499 -474
+				43 -26 44 -28 25 -42 -43 -34 -248 -125 -374 -167 -473 -157 -1123 -260 -2010
+				-318 -266 -18 -1419 -17 -1670 0 -909 63 -1566 168 -2017 323 -114 39 -318
+				131 -357 162 -19 14 -18 16 25 42 370 235 1378 424 2524 475 444 20 934 20
+				1355 -1z m-3810 -1214 c1006 -373 3091 -509 4775 -310 626 74 1152 188 1504
+				325 56 22 103 40 104 40 1 0 1 -1551 0 -3447 l-3 -3447 -27 -23 c-50 -41 -245
+				-131 -385 -177 -428 -143 -1074 -252 -1813 -306 -622 -45 -1439 -45 -2075 1
+				-1028 73 -1910 268 -2197 485 l-33 25 0 779 0 779 638 3 637 3 52 24 c64 29
+				134 101 158 164 26 69 18 188 -18 249 -32 56 -86 104 -146 132 -45 21 -60 21
+				-684 24 l-637 3 2 472 3 472 645 5 645 5 49 25 c215 110 207 432 -13 534 -45
+				21 -58 21 -688 24 l-643 3 0 474 0 474 643 3 c629 3 643 3 687 24 138 65 205
+				228 154 377 -20 60 -79 126 -140 157 l-49 25 -645 5 -645 5 -3 824 c-2 782 -1
+				823 15 816 10 -4 70 -26 133 -50z"/>
+				<path d="M5310 6494 c-106 -29 -136 -61 -386 -414 -326 -458 -564 -841 -779
+				-1250 -183 -348 -228 -508 -228 -805 0 -147 4 -199 21 -281 131 -611 589
+				-1059 1197 -1171 138 -25 380 -23 523 5 296 59 548 193 762 406 251 249 396
+				558 431 918 20 216 -19 474 -106 683 -108 262 -567 1008 -1004 1632 -142 203
+				-178 241 -256 271 -53 20 -118 22 -175 6z m200 -992 c260 -390 574 -909 665
+				-1097 53 -110 76 -205 82 -340 4 -85 1 -143 -10 -200 -66 -348 -339 -627 -687
+				-701 -85 -18 -267 -17 -354 1 -330 70 -598 329 -676 655 -38 163 -22 390 38
+				530 41 95 225 435 333 616 121 203 465 724 477 724 4 0 63 -85 132 -188z"/>
+				</g>
+				</svg>
 			</div>
+			<div class="side-by-side humidity_edgar-text">Nivel agua</div>
+			<div class="side-by-side humidity_edgar">
+				<?php echo $edgar_nvwa ?>
+			<span class="superscript"></span></div>
+		</div>
+
+		<div class="btn">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<a href="?regar_Edgar_on=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Iniciar regado</a>
+			<a href="?regar_Edgar_off=true" class="side-by-side w3-button w3-medium w3-blue w3-card-4">Detener regado</a>
 		</div>
 	</div>
 
@@ -288,7 +434,7 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_angeles-text">Temperatura</div>
 			<div class="side-by-side humidity_angeles">
-				<?php echo $salida2 ?>
+				<?php echo $angeles_temp ?>
 			<span class="superscript">C</span></div>
 		</div>
 
@@ -302,7 +448,7 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_angeles-text">Humedad</div>
 			<div class="side-by-side humidity_angeles">
-				<?php echo $salida2 ?>
+				<?php echo $angeles_humd ?>
 			<span class="superscript"></span></div>
 		</div>
 
@@ -344,13 +490,55 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_angeles-text">Luminosidad</div>
 			<div class="side-by-side humidity_angeles">
-				<?php echo $salida2 ?>
+				<?php echo $angeles_lumi ?>
 			<span class="superscript"></span></div>
+		</div>
 
-			<div class="btn">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Angeles=true" class="side-by-side w3-button w3-medium w3-orange w3-card-4">Regar ahora</a>
+		<div class="data_nivel_agua">
+			<div class="side-by-side humidity_angeles-icon">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+				width="48px" height="72px" viewBox="0 0 900.000000 980.000000"
+				preserveAspectRatio="xMidYMid meet" style="margin-top: -21.5px;height: 74px;width: 20px;">
+				<g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+				fill="#FFFFFF" stroke="none">
+				<path d="M3900 9789 c-1202 -45 -2243 -231 -2772 -495 -251 -125 -399 -263
+				-469 -439 l-24 -60 -3 -3880 c-2 -3550 -1 -3884 14 -3930 44 -137 122 -242
+				252 -340 269 -202 736 -361 1395 -475 1744 -301 4211 -189 5347 243 353 135
+				562 289 658 487 l47 95 3 3865 c2 2837 0 3881 -8 3925 -50 265 -325 480 -831
+				648 -810 269 -2219 408 -3609 356z m1280 -600 c1150 -55 2131 -241 2499 -474
+				43 -26 44 -28 25 -42 -43 -34 -248 -125 -374 -167 -473 -157 -1123 -260 -2010
+				-318 -266 -18 -1419 -17 -1670 0 -909 63 -1566 168 -2017 323 -114 39 -318
+				131 -357 162 -19 14 -18 16 25 42 370 235 1378 424 2524 475 444 20 934 20
+				1355 -1z m-3810 -1214 c1006 -373 3091 -509 4775 -310 626 74 1152 188 1504
+				325 56 22 103 40 104 40 1 0 1 -1551 0 -3447 l-3 -3447 -27 -23 c-50 -41 -245
+				-131 -385 -177 -428 -143 -1074 -252 -1813 -306 -622 -45 -1439 -45 -2075 1
+				-1028 73 -1910 268 -2197 485 l-33 25 0 779 0 779 638 3 637 3 52 24 c64 29
+				134 101 158 164 26 69 18 188 -18 249 -32 56 -86 104 -146 132 -45 21 -60 21
+				-684 24 l-637 3 2 472 3 472 645 5 645 5 49 25 c215 110 207 432 -13 534 -45
+				21 -58 21 -688 24 l-643 3 0 474 0 474 643 3 c629 3 643 3 687 24 138 65 205
+				228 154 377 -20 60 -79 126 -140 157 l-49 25 -645 5 -645 5 -3 824 c-2 782 -1
+				823 15 816 10 -4 70 -26 133 -50z"/>
+				<path d="M5310 6494 c-106 -29 -136 -61 -386 -414 -326 -458 -564 -841 -779
+				-1250 -183 -348 -228 -508 -228 -805 0 -147 4 -199 21 -281 131 -611 589
+				-1059 1197 -1171 138 -25 380 -23 523 5 296 59 548 193 762 406 251 249 396
+				558 431 918 20 216 -19 474 -106 683 -108 262 -567 1008 -1004 1632 -142 203
+				-178 241 -256 271 -53 20 -118 22 -175 6z m200 -992 c260 -390 574 -909 665
+				-1097 53 -110 76 -205 82 -340 4 -85 1 -143 -10 -200 -66 -348 -339 -627 -687
+				-701 -85 -18 -267 -17 -354 1 -330 70 -598 329 -676 655 -38 163 -22 390 38
+				530 41 95 225 435 333 616 121 203 465 724 477 724 4 0 63 -85 132 -188z"/>
+				</g>
+				</svg>
 			</div>
+			<div class="side-by-side humidity_angeles-text">Nivel agua</div>
+			<div class="side-by-side humidity_angeles">
+				<?php echo $angeles_nvwa ?>
+			<span class="superscript"></span></div>
+		</div>
+
+		<div class="btn">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<a href="?regar_Angeles_on=true" class="side-by-side w3-button w3-medium w3-orange w3-card-4">Iniciar regado</a>
+			<a href="?regar_Angeles_off=true" class="side-by-side w3-button w3-medium w3-orange w3-card-4">Detener regado</a>
 		</div>
 	</div>
 
@@ -369,7 +557,7 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_myron-text">Temperatura</div>
 			<div class="side-by-side humidity_myron">
-				<?php echo $salida2 ?>
+				<?php echo $myron_temp ?>
 			<span class="superscript">C</span></div>
 		</div>
 
@@ -383,7 +571,7 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_myron-text">Humedad</div>
 			<div class="side-by-side humidity_myron">
-				<?php echo $salida2 ?>
+				<?php echo $myron_humd ?>
 			<span class="superscript"></span></div>
 
 
@@ -427,48 +615,19 @@ echo '</script>';
 			</div>
 			<div class="side-by-side humidity_myron-text">Luminosidad</div>
 			<div class="side-by-side humidity_myron">
-				<?php echo $salida2 ?>
+				<?php echo $myron_lumi ?>
 			<span class="superscript"></span></div>
+		</div>
 
-			<div class="btn">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Myron=true" class="side-by-side w3-button w3-medium w3-lime w3-card-4">Regar ahora</a>
-			</div>
+		<div class="btn">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<a href="?regar_Myron_on=true" class="side-by-side w3-button w3-medium w3-lime w3-card-4">Iniciar regado</a>
+			<a href="?regar_Myron_off=true" class="side-by-side w3-button w3-medium w3-lime w3-card-4">Detener regado</a>
 		</div>
 	</div>
 
 	<div id="webpage_johna">
 		<h1>Sensor de johna</h1>
-		<div class="data_temperatura">
-			<div class="side-by-side humidity_johna-icon">
-				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
-				<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
-				c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
-				c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
-				c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
-				c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"/>
-				</svg>
-			</div>
-			<div class="side-by-side humidity_johna-text">Temperatura</div>
-			<div class="side-by-side humidity_johna">
-				<?php echo $salida2 ?>
-			<span class="superscript">C</span></div>
-		</div>
-
-		<div class="data_humedad">
-			<div class="side-by-side humidity_johna-icon">
-				<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				"; width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
-				<path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
-				c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
-				</svg>
-			</div>
-			<div class="side-by-side humidity_johna-text">Humedad</div>
-			<div class="side-by-side humidity_johna">
-				<?php echo $salida2 ?>
-			<span class="superscript"></span></div>
-		</div>
 
 		<div class="data_luminosidad">
 			<div class="side-by-side humidity_johna-icon">
@@ -510,11 +669,12 @@ echo '</script>';
 			<div class="side-by-side humidity_johna">
 				<?php echo $salida2 ?>
 			<span class="superscript"></span></div>
+		</div>
 
-			<div class="btn">
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-				<a href="?regar_Johna=true" class="side-by-side w3-button w3-medium w3-deep-purple w3-card-4">Regar ahora</a>
-			</div>
+		<div class="btn">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<a href="?regar_Johna_on=true" class="side-by-side w3-button w3-medium w3-deep-purple w3-card-4">Iniciar regado</a>
+			<a href="?regar_Johna_off=true" class="side-by-side w3-button w3-medium w3-deep-purple w3-card-4">Detener regado</a>
 		</div>
 	</div>
 

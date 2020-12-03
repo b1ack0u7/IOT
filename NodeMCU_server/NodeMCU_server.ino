@@ -10,6 +10,8 @@ DHT dht(DHT_pin, DHTTYPE);
 float Temperature;
 float Humidity;
 int Water;
+int Lumi;
+int Nivel;
 int led_pin = 5;
 int water_pin = A0; 
 //-----------------------------
@@ -17,6 +19,11 @@ int water_pin = A0;
 //electrovalvula
 int valve = 14;
 //-----------------------------
+//Luminocidad y nivel
+int lum = 12;
+int nv_wa = 13;
+//-----------------------------
+
 
 const char* ssid = "Ubee4C00-2.4G";
 const char* password = "5F99F84C00";
@@ -32,6 +39,9 @@ void setup(){
     
     pinMode(valve, OUTPUT);
     digitalWrite(valve, HIGH);
+
+    pinMode(lum, INPUT);
+    pinMode(nv_wa, INPUT);
     
     digitalWrite(led_pin, LOW);
     dht.begin();
@@ -74,22 +84,14 @@ void handle_fetch(){
     Humidity = dht.readHumidity();
     Temperature = dht.readTemperature();
     Water = analogRead(water_pin);
-    
-    server.send(200, "text/html", HTML_fetch(Temperature,Humidity,Water));
+    Lumi = digitalRead(lum);
+    Nivel = digitalRead(nv_wa);
+    server.send(200, "text/html", HTML_fetch(Temperature,Humidity,Water,Lumi,Nivel));
 }
 
 void handle_water_on(){
     server.send(200, "text/plain", "Rociando agua");
-    /*
-    digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW);
-    delay(1000);
-    digitalWrite(led_pin, HIGH);
-    */
     digitalWrite(valve, LOW);
-    //delay(1500);
-    //digitalWrite(valve, HIGH);
 }
 
 void handle_water_off(){
@@ -97,13 +99,12 @@ void handle_water_off(){
     digitalWrite(valve, HIGH);
 }
 
-
 void handle_NotFound(){
     server.send(404, "text/plain", "El sitio no existe");
 }
 
 
-String HTML_fetch(float Temp, float Humi, float Water){
+String HTML_fetch(float Temp, float Humi, float Water, int lumin, int Nv){
   String ptr = "<!DOCTYPE html><html>\n";
   ptr += "<title>Sensor DHT</title>\n";
   ptr += "</head><meta http-equiv=\"refresh\" content=\"1\"\n>";
@@ -118,6 +119,14 @@ String HTML_fetch(float Temp, float Humi, float Water){
   ptr += "</label></div>\n";
   ptr += "<div><label>Agua: ";
   ptr += Water;
+  ptr += "\n";
+  ptr += "</label></div>\n";
+  ptr += "<div><label>Luminosidad: ";
+  ptr += lumin;
+  ptr += "\n";
+  ptr += "</label></div>\n";
+  ptr += "<div><label>Nivel_agua: ";
+  ptr += Nv;
   ptr += "\n";
   ptr += "</label></div>\n";
   ptr += "</body></html>\n";

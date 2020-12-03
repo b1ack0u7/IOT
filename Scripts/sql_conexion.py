@@ -9,7 +9,7 @@ class Conexion_fetchdata():
         database="iot")
 
     def add_reg(self,val):
-        sql="INSERT INTO reg (nombre, humedad, temperatura, luminosidad, fecha, hora) VALUES (%s, %s, %s, %s, %s, %s)"
+        sql="INSERT INTO reg (nombre, humedad, temperatura, luminosidad, nv_agua, fecha, hora) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         mycursor=self.mydb.cursor()
         mycursor.execute(sql,val)
         self.mydb.commit()
