@@ -17,23 +17,24 @@ td.start()
 
 text = subprocess.run(['curl', '-m', '5','http://jonhrh.ddns.net/fetch'], stdout=subprocess.PIPE)
 r=str(text.stdout)
+r_check=r.replace("'","").replace("b","")
 
-arr.append("Johna")
-arr.append("N/D")
-arr.append("N/D")
-
-arr.append(r[r.find("Luz:"):len(r)])
-arr[3] = arr[3][0:arr[3].find("\\n")]
-arr[3] = arr[3][arr[3].find(":")+2:len(arr[3])]
-
-arr.append("N/D")
-
-td.join()
-arr.append(fecha)
-arr.append(time.rstrip("\n"))
-
-if(arr[1] == "" and arr[2] == ""):
+if(r_check == ""):
     print("lumi=N/C")
 else:
+    arr.append("Johna")
+    arr.append("N/D")
+    arr.append("N/D")
+
+    arr.append(r[r.find("Luz:"):len(r)])
+    arr[3] = arr[3][0:arr[3].find("\\n")]
+    arr[3] = arr[3][arr[3].find(":")+2:len(arr[3])]
+
+    arr.append("N/D")
+
+    td.join()
+    arr.append(fecha)
+    arr.append(time.rstrip("\n"))
+
     CLSS_CON.add_reg(arr)
     print("lumi=%s"%(arr[3]))

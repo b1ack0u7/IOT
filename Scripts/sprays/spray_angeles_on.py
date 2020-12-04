@@ -15,7 +15,7 @@ def date():
 td=threading.Thread(target=date)
 td.start()
 
-text = subprocess.run(['curl', 'http://aahiot.ddns.net/water_off'], stdout=subprocess.PIPE)
+text = subprocess.run(['curl', 'http://aahiot.ddns.net/water_on'], stdout=subprocess.PIPE)
 td.join()
 arr.append("Angeles")
 arr.append("Encendido")

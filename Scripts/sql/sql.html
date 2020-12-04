@@ -1,7 +1,11 @@
 <html>
 <head>
     <title>SQL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
+        html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #333333;}
+        h1 {margin: 10px auto 30px;}
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -17,7 +21,6 @@
             text-align: center;
             padding: 8px;
         }
-
         tr:nth-child(even) {
             background-color: #dddddd;
         }
@@ -26,12 +29,12 @@
 
 <body>
 <h1>Bienvenido al acceso a la base de datos</h1>
-<h2>Huerto IoT</h2>
-<form action="">
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" value="todos"><br><br>
-    <button type="submit" name="button" value="cons_reg">Consultar Registro</button>
-    <button type="submit" name="button" value="cons_roc">Consultar Registro EV</button>
+<form class="w3-container" action="">
+    <label class="w3-text-teal" for="name" style="font-size: large;"><b>Nombre a buscar</b></label>
+    <input class="w3-input w3-border w3-light-grey" style="width: 450px;margin-right: auto;margin-left: auto;text-align: center;" type="text" id="name" name="name" value="todos"><p></p>
+    <a href="index.php" class="w3-button w3-medium w3-green w3-card-4" style="width: 150px;margin-right: auto;margin-left: auto;">Regresar</a><p></p>
+    <button class="w3-btn w3-teal w3-card-4" style="width: 200px;" type="submit" name="button" value="cons_reg">Consultar Registro</button>
+    <button class="w3-btn w3-teal w3-card-4" style="width: 200px;" type="submit" name="button" value="cons_roc">Consultar Registro EV</button>
 </form>
 
 <?php
@@ -42,6 +45,10 @@ $out = shell_exec("python3 /var/www/html/scripts/sql/sql_fetch.py $name $btn");
 $data = explode(";", $out);
 
 if ($btn == "cons_reg"){
+echo '  <label class="w3-text-teal" for="name" style="font-size: large;"><b>
+        Mostrando datos de ';
+echo ucfirst($name);
+echo '</b></label>';
 echo '  <table>
         <tr>
         <th>Conteo</th>
@@ -55,6 +62,10 @@ echo '  <table>
         </tr>';
 }
 else{
+echo '  <label class="w3-text-teal" for="name" style="font-size: large;"><b>
+        Mostrando datos EV de ';
+echo ucfirst($name);
+echo '</b></label>';
 echo '  <table>
         <tr>
         <th>Conteo</th>
@@ -77,8 +88,6 @@ for($i = 0; $i < count($data); ++$i) {
 
 }
 echo '</table>';
-
-
 }
 ?>
 </body>
